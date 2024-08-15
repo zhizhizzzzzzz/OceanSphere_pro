@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/second"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+>
+
+    <!--    <Button-->
+<!--        android:id="@+id/btn_up"-->
+<!--        android:layout_width="80dp"-->
+<!--        android:layout_height="80dp"-->
+<!--        android:layout_marginEnd="134dp"-->
+<!--        android:layout_marginBottom="80dp"-->
+<!--        android:background="@color/white"-->
+<!--        android:text="↑"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="30sp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent" />-->
+
+
+    <android.opengl.GLSurfaceView
+        android:id="@+id/mGLView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
+
+    <Button
+        android:id="@+id/btnup"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="140dp"
+        android:layout_marginBottom="124dp"
+        android:alpha="0.5"
+        android:background="@color/cardview_light_background"
+        android:text="→"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btnleft"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="220dp"
+        android:layout_marginBottom="80dp"
+        android:alpha="0.5"
+        android:background="@color/white"
+        android:text="↑"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnright"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btnright"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="220dp"
+        android:layout_marginBottom="44dp"
+        android:alpha="0.5"
+        android:background="@color/cardview_light_background"
+        android:text="↓"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btnback"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginEnd="84dp"
+        android:layout_marginBottom="124dp"
+        android:alpha="0.5"
+        android:background="@color/cardview_light_background"
+        android:text="←"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnup" />
+
+    <Button
+        android:id="@+id/btn_float"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
+        android:alpha="0.5"
+        android:background="@color/cardview_light_background"
+        android:rotation="90"
+        android:text="float"
+        android:textColor="@color/black"
+        android:textSize="8sp"
+        app:layout_constraintStart_toEndOf="@+id/btn_sink"
+        app:layout_constraintTop_toTopOf="@+id/mGLView" />
+
+    <Button
+        android:id="@+id/btn_sink"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="50dp"
+        android:alpha="0.5"
+        android:background="@color/cardview_light_background"
+        android:rotation="90"
+        android:text="sink"
+        android:textColor="@color/black"
+        android:textSize="8sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/mGLView" />
+</androidx.constraintlayout.widget.ConstraintLayout>
