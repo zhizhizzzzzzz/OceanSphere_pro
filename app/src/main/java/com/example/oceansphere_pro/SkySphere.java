@@ -17,6 +17,7 @@ import java.net.DatagramSocket;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
 import java.util.ArrayList;
 
 
@@ -43,7 +44,7 @@ public class SkySphere{
     private int mHPosition;
     private int mHCoordinate;
 
-    private int textureId;
+    int textureId;
 
     private float[] mViewMatrix=new float[16];
     private float[] mProjectMatrix=new float[16];
@@ -223,4 +224,68 @@ public class SkySphere{
         return 0;
     }
 
+    public void updateTexture(Bitmap newBitmap) {
+        if (newBitmap == null) {
+            Log.e("SkySphere", "Bitmap 是空的，不能更新纹理");
+            return;
+        }
+
+        // 删除旧的纹理ID
+        if (textureId != 0) {
+            GLES20.glDeleteTextures(1, new int[]{textureId}, 0);
+            Log.i("SkySphere", "旧纹理删除成功，ID：" + textureId);
+        }
+
+        // 生成新的纹理ID
+        int[] newTextureId = new int[1];
+        GLES20.glGenTextures(1, newTextureId, 0);
+        textureId = newTextureId[0];
+        Log.i("SkySphere", "生成新的纹理ID：" + textureId);
+
+        if (textureId == 0) {
+            Log.e("SkySphere", "纹理生成失败，ID为0");
+            return;
+        }
+
+        // 绑定新的纹理
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureId);
+        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_NEAREST);
+        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR);
+        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE);
+        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE);
+        GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, newBitmap, 0);
+
+        // 检查是否生成并绑定了纹理
+        int[] boundTextureId = new int[1];
+        GLES20.glGetIntegerv(GLES20.GL_TEXTURE_BINDING_2D, boundTextureId, 0);
+        if (boundTextureId[0] == textureId) {
+            Log.i("SkySphere", "纹理生成成功，ID：" + textureId);
+        } else {
+            Log.e("SkySphere", "纹理生成失败！");
+        }
+
+        // 检查是否有OpenGL错误
+        int error = GLES20.glGetError();
+        if (error != GLES20.GL_NO_ERROR) {
+            Log.e("SkySphere", "OpenGL 错误代码：" + error);
+        } else {
+            Log.i("SkySphere", "纹理更新成功，ID：" + textureId);
+        }
+
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0);
+    }
+
+
+
+
+
+
+
+
+    public SkySphere updateSkySphereWithBitmap(SkySphere skysphere, Bitmap newBitmap) {
+        if (skysphere != null) {
+            skysphere.updateTexture(newBitmap);
+        }
+        return skysphere; // 返回更新后的skysphere对象
+    }
 }

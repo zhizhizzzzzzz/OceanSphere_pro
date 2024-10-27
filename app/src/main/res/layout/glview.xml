@@ -28,88 +28,77 @@
         tools:layout_editor_absoluteY="0dp" />
 
     <Button
-        android:id="@+id/btnup"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginEnd="140dp"
-        android:layout_marginBottom="124dp"
-        android:alpha="0.5"
-        android:background="@color/cardview_light_background"
-        android:text="→"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:id="@+id/mButtonForward"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="66dp"
+        android:padding="10dp"
 
-    <Button
-        android:id="@+id/btnleft"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginEnd="220dp"
-        android:layout_marginBottom="80dp"
-        android:alpha="0.5"
-        android:background="@color/white"
+        android:rotation="90"
         android:text="↑"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnright"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/mButtonRight"
+        app:layout_constraintStart_toEndOf="@+id/mButtonBehind" />
 
     <Button
-        android:id="@+id/btnright"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginEnd="220dp"
-        android:layout_marginBottom="44dp"
-        android:alpha="0.5"
-        android:background="@color/cardview_light_background"
+        android:id="@+id/mButtonBehind"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="33dp"
+        android:padding="10dp"
+
+        android:rotation="90"
         android:text="↓"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/mButtonRight"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btnback"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_marginEnd="84dp"
-        android:layout_marginBottom="124dp"
-        android:alpha="0.5"
-        android:background="@color/cardview_light_background"
+        android:id="@+id/mButtonLeft"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:padding="10dp"
+        android:rotation="90"
+
         android:text="←"
-        android:textColor="@color/black"
-        android:textSize="30sp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/mButtonForward"
+        app:layout_constraintStart_toEndOf="@+id/mButtonBehind" />
+
+    <Button
+        android:id="@+id/mButtonRight"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:layout_marginBottom="33dp"
+        android:padding="10dp"
+        android:rotation="90"
+        android:text="→"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btnup" />
+        app:layout_constraintStart_toEndOf="@+id/mButtonBehind" />
 
     <Button
-        android:id="@+id/btn_float"
+        android:id="@+id/mButtonUp"
         android:layout_width="66dp"
         android:layout_height="66dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="50dp"
-        android:alpha="0.5"
-        android:background="@color/cardview_light_background"
+        android:layout_marginStart="66dp"
+        android:padding="10dp"
         android:rotation="90"
-        android:text="float"
-        android:textColor="@color/black"
-        android:textSize="8sp"
-        app:layout_constraintStart_toEndOf="@+id/btn_sink"
-        app:layout_constraintTop_toTopOf="@+id/mGLView" />
+        android:text="↑↑"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/mButtonDown"
+        app:layout_constraintTop_toTopOf="@+id/mButtonDown" />
 
     <Button
-        android:id="@+id/btn_sink"
+        android:id="@+id/mButtonDown"
         android:layout_width="66dp"
         android:layout_height="66dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="50dp"
-        android:alpha="0.5"
-        android:background="@color/cardview_light_background"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="33dp"
+        android:padding="10dp"
         android:rotation="90"
-        android:text="sink"
-        android:textColor="@color/black"
-        android:textSize="8sp"
+        android:text="↓↓"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/mGLView" />
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -70,7 +70,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
             MenuHolder(View itemView) {
                 super(itemView);
-                mBtn= (Button)itemView.findViewById(R.id.mBtn);
+                mBtn= itemView.findViewById(R.id.mBtn);
                 mBtn.setOnClickListener(MainActivity.this);
             }
 
