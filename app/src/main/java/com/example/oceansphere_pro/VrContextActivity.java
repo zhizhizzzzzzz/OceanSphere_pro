@@ -148,7 +148,7 @@ public class VrContextActivity extends BaseActivity implements GLSurfaceView.Ren
     private void updateImageView(byte[] imageData) {
         Bitmap bitmap = BitmapFactory.decodeByteArray(imageData, 0, imageData.length);
         if (bitmap != null) {
-            runOnUiThread(() -> {
+            mGLView.queueEvent(() -> {
                 mSkySphere.updateTexture(bitmap);
                 if (mSkySphere.textureId != 0) {
                     mGLView.requestRender(); // 请求重新渲染
