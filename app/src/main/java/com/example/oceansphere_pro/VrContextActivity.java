@@ -36,7 +36,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 
 public class VrContextActivity extends BaseActivity implements GLSurfaceView.Renderer,SensorEventListener {
-    private static final String IP_ADDRESS = "192.168.10.103"; // 替换为目标IP地址
+    private static final String IP_ADDRESS = "192.168.10.100"; // 替换为目标IP地址
     private static final int PORT = 8765; // 替换为目标端口
 
     private GLSurfaceView mGLView;
