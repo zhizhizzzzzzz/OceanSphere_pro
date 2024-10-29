@@ -1,6 +1,23 @@
 import socket
 import serial
 
+def receive_ip(port=8000):
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    server_address = ('', port)
+    sock.bind(server_address)
+    print(f"UDP服务器正在端口 {port} 上等待接收IP地址...")
+
+    try:
+        data, address = sock.recvfrom(4096)
+        if data:
+            ip_address = data.decode('utf-8')
+            print(f"接收到来自 {address} 的IP地址: {ip_address}")
+            return ip_address
+    except KeyboardInterrupt:
+        print("服务器已停止")
+    finally:
+        sock.close()
+
 def calculate_parity_byte(data):
     # 计算数据中1的个数
     ones_count = sum(bin(byte).count('1') for byte in data)
@@ -67,3 +84,4 @@ def start_udp_server(port=8765):
 
 if __name__ == '__main__':
     start_udp_server()
+    
