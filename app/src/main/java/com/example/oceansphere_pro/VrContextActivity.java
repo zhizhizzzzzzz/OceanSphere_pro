@@ -45,7 +45,7 @@ public class VrContextActivity extends BaseActivity implements GLSurfaceView.Ren
     private SkySphere mSkySphere;
     private Handler handler2;
     private boolean isSending = false;
-    private int[] currentState = {0, 0, 0};
+    private int[] currentState = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
     private Runnable sendRunnable;
     private Handler handler = new Handler();
     private float[] matrix=new float[16];
@@ -57,22 +57,51 @@ public class VrContextActivity extends BaseActivity implements GLSurfaceView.Ren
         super.onCreate(savedInstanceState);
         setContentView(R.layout.glview);
 
-        mSensorManager=(SensorManager)getSystemService(Context.SENSOR_SERVICE);
-        List<Sensor> sensors=mSensorManager.getSensorList(Sensor.TYPE_ALL);
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        List<Sensor> sensors = mSensorManager.getSensorList(Sensor.TYPE_ALL);
         //todo 判断是否存在rotation vector sensor
-        mRotation=mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
+        mRotation = mSensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR);
 
-        mGLView=(GLSurfaceView) findViewById(R.id.mGLView);
+        mGLView = (GLSurfaceView) findViewById(R.id.mGLView);
         mGLView.setEGLContextClientVersion(2);
         mGLView.setRenderer(this);
         mGLView.setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
 
-        mSkySphere=new SkySphere(this.getApplicationContext(),"360sp.jpg");
+        mSkySphere = new SkySphere(this.getApplicationContext(), "360sp.jpg");
 
         handler2 = new Handler(Looper.getMainLooper());
         udpReceiver = new UdpReceiver(8081);
         Thread receiverThread = new Thread(udpReceiver);
         receiverThread.start();
+
+
+        Button mainButton = findViewById(R.id.mainButton);
+        Button ButtonForward = findViewById(R.id.mButtonForward);
+        Button ButtonBehind = findViewById(R.id.mButtonBehind);
+        Button ButtonLeft = findViewById(R.id.mButtonLeft);
+        Button ButtonRight = findViewById(R.id.mButtonRight);
+        Button ButtonUp = findViewById(R.id.mButtonUp);
+        Button ButtonDown = findViewById(R.id.mButtonDown);
+
+        Button Cartilage1l = findViewById(R.id.mCartilage1l);
+        Button Cartilage1r = findViewById(R.id.mCartilage1r);
+        Button Cartilage2l = findViewById(R.id.mCartilage2l);
+        Button Cartilage2r = findViewById(R.id.mCartilage2r);
+        Button Cartilage3l = findViewById(R.id.mCartilage3l);
+        Button Cartilage3r = findViewById(R.id.mCartilage3r);
+        Button Cartilage4l = findViewById(R.id.mCartilage4l);
+        Button Cartilage4r = findViewById(R.id.mCartilage4r);
+        Button Cartilage5l = findViewById(R.id.mCartilage5l);
+        Button Cartilage5r = findViewById(R.id.mCartilage5r);
+        Button Cartilage6l = findViewById(R.id.mCartilage6l);
+        Button Cartilage6r = findViewById(R.id.mCartilage6r);
+
+        Button Catch1open = findViewById(R.id.mCatch1l);
+        Button Catch1close = findViewById(R.id.mCatch1r);
+        Button Catch2open = findViewById(R.id.mCatch2l);
+        Button Catch2close = findViewById(R.id.mCatch2r);
+
+
 
         BlockingQueue<byte[]> imageQueue = udpReceiver.getImageQueue();
         setupButton(R.id.mButtonForward, 0, 1);
@@ -81,7 +110,40 @@ public class VrContextActivity extends BaseActivity implements GLSurfaceView.Ren
         setupButton(R.id.mButtonRight, 1, 2);
         setupButton(R.id.mButtonUp, 2, 1);
         setupButton(R.id.mButtonDown, 2, 2);
+        setupButton(R.id.mCartilage1l, 3, 1);
+        setupButton(R.id.mCartilage1r, 3, 2);
+        setupButton(R.id.mCartilage2l, 4, 1);
+        setupButton(R.id.mCartilage2r, 4, 2);
+        setupButton(R.id.mCartilage3l, 5, 1);
+        setupButton(R.id.mCartilage3r, 5, 2);
+        setupButton(R.id.mCartilage4l, 6, 1);
+        setupButton(R.id.mCartilage4r, 6, 2);
+        setupButton(R.id.mCartilage5l, 7, 1);
+        setupButton(R.id.mCartilage5r, 7, 2);
+        setupButton(R.id.mCartilage6l, 8, 1);
+        setupButton(R.id.mCartilage6r, 8, 2);
+        setupButton(R.id.mCatch1l, 9, 1);
+        setupButton(R.id.mCatch1r, 9, 2);
+        setupButton(R.id.mCatch2l, 10, 1);
+        setupButton(R.id.mCatch2r, 10, 2);
 
+
+        Cartilage1l.setVisibility(View.GONE);
+        Cartilage1r.setVisibility(View.GONE);
+        Cartilage2l.setVisibility(View.GONE);
+        Cartilage2r.setVisibility(View.GONE);
+        Cartilage3l.setVisibility(View.GONE);
+        Cartilage3r.setVisibility(View.GONE);
+        Cartilage4l.setVisibility(View.GONE);
+        Cartilage4r.setVisibility(View.GONE);
+        Cartilage5l.setVisibility(View.GONE);
+        Cartilage5r.setVisibility(View.GONE);
+        Cartilage6l.setVisibility(View.GONE);
+        Cartilage6r.setVisibility(View.GONE);
+        Catch1open.setVisibility(View.GONE);
+        Catch1close.setVisibility(View.GONE);
+        Catch2open.setVisibility(View.GONE);
+        Catch2close.setVisibility(View.GONE);
 
         new Thread(() -> {
             while (true) {
@@ -94,7 +156,60 @@ public class VrContextActivity extends BaseActivity implements GLSurfaceView.Ren
             }
         }).start();
 
+        mainButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (ButtonForward.getVisibility() == View.GONE) {
+                    Cartilage1l.setVisibility(View.GONE);
+                    Cartilage1r.setVisibility(View.GONE);
+                    Cartilage2l.setVisibility(View.GONE);
+                    Cartilage2r.setVisibility(View.GONE);
+                    Cartilage3l.setVisibility(View.GONE);
+                    Cartilage3r.setVisibility(View.GONE);
+                    Cartilage4l.setVisibility(View.GONE);
+                    Cartilage4r.setVisibility(View.GONE);
+                    Cartilage5l.setVisibility(View.GONE);
+                    Cartilage5r.setVisibility(View.GONE);
+                    Cartilage6l.setVisibility(View.GONE);
+                    Cartilage6r.setVisibility(View.GONE);
+                    Catch1open.setVisibility(View.GONE);
+                    Catch1close.setVisibility(View.GONE);
+                    Catch2open.setVisibility(View.GONE);
+                    Catch2close.setVisibility(View.GONE);
+                    ButtonForward.setVisibility(View.VISIBLE);
+                    ButtonBehind.setVisibility(View.VISIBLE);
+                    ButtonLeft.setVisibility(View.VISIBLE);
+                    ButtonRight.setVisibility(View.VISIBLE);
+                    ButtonUp.setVisibility(View.VISIBLE);
+                    ButtonDown.setVisibility(View.VISIBLE);
+                } else {
+                    ButtonForward.setVisibility(View.GONE);
+                    ButtonBehind.setVisibility(View.GONE);
+                    ButtonLeft.setVisibility(View.GONE);
+                    ButtonRight.setVisibility(View.GONE);
+                    ButtonUp.setVisibility(View.GONE);
+                    ButtonDown.setVisibility(View.GONE);
+                    Cartilage1l.setVisibility(View.VISIBLE);
+                    Cartilage1r.setVisibility(View.VISIBLE);
+                    Cartilage2l.setVisibility(View.VISIBLE);
+                    Cartilage2r.setVisibility(View.VISIBLE);
+                    Cartilage3l.setVisibility(View.VISIBLE);
+                    Cartilage3r.setVisibility(View.VISIBLE);
+                    Cartilage4l.setVisibility(View.VISIBLE);
+                    Cartilage4r.setVisibility(View.VISIBLE);
+                    Cartilage5l.setVisibility(View.VISIBLE);
+                    Cartilage5r.setVisibility(View.VISIBLE);
+                    Cartilage6l.setVisibility(View.VISIBLE);
+                    Cartilage6r.setVisibility(View.VISIBLE);
+                    Catch1open.setVisibility(View.VISIBLE);
+                    Catch1close.setVisibility(View.VISIBLE);
+                    Catch2open.setVisibility(View.VISIBLE);
+                    Catch2close.setVisibility(View.VISIBLE);
+                }
+            }
+        });
     }
+
 
 
 
@@ -179,7 +294,7 @@ public class VrContextActivity extends BaseActivity implements GLSurfaceView.Ren
                     case MotionEvent.ACTION_CANCEL:
                         currentState[index] = 0;
                         if (noButtonsPressed()) {
-                            sendUdpData("000");
+                            sendUdpData("00000000000");
                             isSending = false;
                             handler.removeCallbacks(sendRunnable);
                         }

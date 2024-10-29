@@ -5,10 +5,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.oceansphere_pro.MainActivity">
+
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/mList"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/mList">
-    </androidx.recyclerview.widget.RecyclerView>
+        android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>

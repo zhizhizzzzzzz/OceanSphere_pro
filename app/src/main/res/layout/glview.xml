@@ -25,7 +25,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        tools:layout_editor_absoluteY="-26dp" />
+
+    <Button
+        android:id="@+id/mainButton"
+        android:layout_width="115dp"
+        android:layout_height="47dp"
+        android:layout_marginBottom="33dp"
+        android:rotation="90"
+        android:text="切换模式"
+        app:layout_constraintBottom_toBottomOf="@+id/mGLView"
+        app:layout_constraintEnd_toEndOf="@+id/mGLView" />
 
     <Button
         android:id="@+id/mButtonForward"
@@ -33,7 +43,6 @@
         android:layout_height="66dp"
         android:layout_marginStart="66dp"
         android:padding="10dp"
-
         android:rotation="90"
         android:text="↑"
         android:textSize="18sp"
@@ -46,7 +55,6 @@
         android:layout_height="66dp"
         android:layout_marginStart="33dp"
         android:padding="10dp"
-
         android:rotation="90"
         android:text="↓"
         android:textSize="18sp"
@@ -59,7 +67,6 @@
         android:layout_height="66dp"
         android:padding="10dp"
         android:rotation="90"
-
         android:text="←"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/mButtonForward"
@@ -101,4 +108,213 @@
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/mCartilage1l"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="33dp"
+        android:padding="10dp"
+        android:rotation="90"
+        android:text="1l"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/mCartilage1r"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="99dp"
+        android:padding="10dp"
+        android:rotation="90"
+        android:text="1r"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/mCartilage2l"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="99dp"
+        android:layout_marginTop="33dp"
+        android:padding="10dp"
+        android:rotation="90"
+        android:text="2l"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/mGLView" />
+
+    <Button
+        android:id="@+id/mCartilage2r"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="99dp"
+        android:layout_marginTop="99dp"
+        android:padding="10dp"
+        android:rotation="90"
+        android:text="2r"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/mCartilage3l"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="165dp"
+        android:layout_marginTop="33dp"
+        android:padding="10dp"
+        android:rotation="90"
+        android:text="3l"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/mGLView" />
+
+    <Button
+        android:id="@+id/mCartilage3r"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="165dp"
+        android:layout_marginTop="99dp"
+        android:padding="10dp"
+        android:rotation="90"
+        android:text="3r"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/mGLView" />
+
+    <Button
+        android:id="@+id/mCartilage4l"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginBottom="165dp"
+        android:padding="10dp"
+        android:rotation="90"
+        android:text="4l"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/mGLView"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/mCartilage4r"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="33dp"
+        android:layout_marginBottom="99dp"
+        android:padding="10dp"
+        android:rotation="90"
+        android:text="4r"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/mGLView"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/mCartilage5l"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="99dp"
+        android:layout_marginBottom="165dp"
+        android:padding="10dp"
+        android:rotation="90"
+        android:text="5l"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/mGLView" />
+
+    <Button
+        android:id="@+id/mCartilage5r"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="99dp"
+        android:layout_marginBottom="99dp"
+        android:padding="10dp"
+        android:rotation="90"
+        android:text="5r"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/mGLView"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/mCartilage6l"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="165dp"
+        android:layout_marginBottom="165dp"
+        android:padding="10dp"
+        android:rotation="90"
+        android:text="6l"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/mGLView" />
+
+    <Button
+        android:id="@+id/mCartilage6r"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="165dp"
+        android:layout_marginBottom="99dp"
+        android:padding="10dp"
+        android:rotation="90"
+        android:text="6r"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/mGLView"
+        app:layout_constraintStart_toStartOf="@+id/mGLView" />
+
+    <Button
+        android:id="@+id/mCatch1l"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="231dp"
+        android:layout_marginTop="33dp"
+        android:padding="10dp"
+        android:rotation="90"
+        android:text="Open"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@+id/mGLView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/mCatch1r"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="231dp"
+        android:layout_marginTop="99dp"
+        android:padding="10dp"
+        android:rotation="90"
+        android:text="Close"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/mCatch2l"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="231dp"
+        android:layout_marginBottom="165dp"
+        android:padding="10dp"
+        android:rotation="90"
+        android:text="Open"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/mGLView" />
+
+    <Button
+        android:id="@+id/mCatch2r"
+        android:layout_width="66dp"
+        android:layout_height="66dp"
+        android:layout_marginStart="231dp"
+        android:layout_marginBottom="99dp"
+        android:padding="10dp"
+        android:rotation="90"
+        android:text="Close"
+        android:textSize="16sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/mGLView" />
 </androidx.constraintlayout.widget.ConstraintLayout>
