@@ -2,86 +2,58 @@ import socket
 import serial
 
 def receive_ip(port=8000):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    server_address = ('', port)
-    sock.bind(server_address)
-    print(f"UDP服务器正在端口 {port} 上等待接收IP地址...")
-
-    try:
+    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
+        sock.bind(('', port))
+        print(f"UDP服务器正在端口 {port} 上等待接收IP地址...")
         data, address = sock.recvfrom(4096)
-        if data:
-            ip_address = data.decode('utf-8')
-            print(f"接收到来自 {address} 的IP地址: {ip_address}")
-            return ip_address
-    except KeyboardInterrupt:
-        print("服务器已停止")
-    finally:
-        sock.close()
+        ip_address = data.decode('utf-8')
+        print(f"接收到来自 {address} 的IP地址: {ip_address}")
+        return ip_address
 
 def calculate_parity_byte(data):
-    # 计算数据中1的个数
-    ones_count = sum(bin(byte).count('1') for byte in data)
-    
-    # 如果1的个数是奇数，返回1；否则返回0
-    return 1 if ones_count % 2 else 0
+    return sum(bin(byte).count('1') for byte in data) % 2
 
 def create_packet_with_parity(data):
-    # 计算奇偶校验位
     parity_byte = calculate_parity_byte(data)
-    
-    # 将数据包和奇偶校验位打包在一起
-    packet = data + bytes([parity_byte])
-    return packet
+    return data + bytes([parity_byte])
+
+def calculate_segment(segment):
+    result = 0
+    for i, char in enumerate(segment):
+        if char == '1':
+            result |= (1 << (i * 2))
+        elif char == '2':
+            result |= (2 << (i * 2))
+    return result
 
 def start_udp_server(port=8765):
-    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    server_address = ('', port)
-    sock.bind(server_address)
+    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
+        sock.bind(('', port))
+        try:
+            ser = serial.Serial(port='COM4', baudrate=115200, timeout=1)
+            serial_available = True
+        except serial.SerialException:
+            print("无法打开COM口，串口通信将被跳过。")
+            serial_available = False
 
-    try:
-        ser = serial.Serial(
-            port='COM3',  # win写COM3，Ubuntu写/dev/ttyUSB0
-            baudrate=115200,
-            timeout=1
-        )
-        serial_available = True
-    except serial.SerialException:
-        print("无法打开COM口，串口通信将被跳过。")
-        serial_available = False
+        print(f"UDP服务器正在端口 {port} 上等待接收数据...")
+        head, tail = 0xA5, 0x7B
 
-    print(f"UDP服务器正在端口 {port} 上等待接收数据...")
-
-    head = 0xA5
-    tail = 0x7B
-    try:
         while True:
             data, address = sock.recvfrom(4096)
-            if data:
-                message = data.decode('utf-8')
-                print(f"接收到来自 {address} 的数据: {message}")
-                
-                # 串口可用时才发送数据
+            message = data.decode('utf-8').strip()
+            print(f"接收到来自 {address} 的数据: {message}")
+
+            if len(message) == 11 and all(c in '012' for c in message):
                 if serial_available:
                     ser.write(bytes([head]))
-                    sum = 0
-                    for i, char in enumerate(message):
-                        if int(char) == 1:
-                            sum += 1 << (2 * i)
-                        elif int(char) == 2:
-                            sum += 2 << (2 * i)
-                    
-                    packet = create_packet_with_parity(sum.to_bytes(1, byteorder="big"))
-                    ser.write(packet)
-                    print(sum)
-                    ser.write(bytes([tail]))
-
-    except KeyboardInterrupt:
-        print("服务器已停止")
-    finally:
-        sock.close()
-        if serial_available:
-            ser.close()
+                    sum1 = calculate_segment(message[:3])  # 前三个元素
+                    sum2 = calculate_segment(message[3:6])  # 中间三个元素
+                    sum3 = calculate_segment(message[6:9])  # 再中间三个元素
+                    sum4 = calculate_segment(message[9:11])  # 最后两个元素
+                    packet = create_packet_with_parity(bytes([sum1, sum2, sum3, sum4]))
+                    ser.write(packet + bytes([tail]))
+                    print(sum1, sum2, sum3, sum4)
 
 if __name__ == '__main__':
     start_udp_server()
-    
