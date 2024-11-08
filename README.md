@@ -23,7 +23,7 @@
 
 - 包含如下功能：
 
-    - 此处我将其部署在ubuntu22.04开发板上，所以请遵循requirements.txt配置环境。如果提示pyserial缺失，请考虑使用 `sudo apt install python3-serial`。
+    - 此处我将其部署在Radxa ubuntu22.04上，所以请遵循requirements.txt配置环境。如果提示pyserial缺失，请考虑使用 `sudo apt install python3-serial`。
 
     - 可接收手机端发送来的ip，并据此向该ip发送 ***从双目鱼眼图像变换来的360°全景图像*** 
     
