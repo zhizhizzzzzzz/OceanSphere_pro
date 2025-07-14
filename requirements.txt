@@ -1,0 +1,14 @@
+certifi==2024.8.30
+charset-normalizer==3.4.0
+crcmod==1.7
+docopt==0.6.2
+idna==3.10
+numpy==2.1.2
+opencv-python==4.10.0.84
+pip==24.2
+pipreqs==0.4.13
+pyserial==3.5
+requests==2.32.3
+scipy==1.14.1
+urllib3==2.2.3
+yarg==0.1.10
