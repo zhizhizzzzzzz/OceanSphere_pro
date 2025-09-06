@@ -1,0 +1,3 @@
+[submodule "third-party/iowqi"]
+	path = third-party/iowqi
+	url = https://github.com/iowqi/CLIP-UIE-Stream
